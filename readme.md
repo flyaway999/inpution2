@@ -40,8 +40,8 @@ O site já está disponível online:
 
 ## 📌 Próximos Passos
 - [ ] Melhorar design responsivo para telas menores  
-- [ ] Adicionar sistema de login para feedback autenticado (opcional)  
-- [ ] Gerar relatórios de feedbacks  
+- [ ] Adicionar sistema de login para feedback autenticado (opcional no momento)  
+- [ ] Gerar progresso do feedback
 
 ---
 
