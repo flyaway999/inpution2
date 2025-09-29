@@ -33,9 +33,7 @@ O site já está disponível online:
 ## 📷 Capturas de Tela
 
 <img src="https://github.com/user-attachments/assets/cf9520f4-4430-4cd1-9f30-ddf41bddaed6" width="800" />
----
 <img src="https://github.com/user-attachments/assets/31704b75-4c39-4431-b6b5-1339618d50f9" width="800" />
----
 <img src="https://github.com/user-attachments/assets/18bfebb9-5d02-412f-8117-dfe8816e4538" width="800" />
 
 ---
