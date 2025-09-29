@@ -24,12 +24,6 @@ O objetivo principal é oferecer um espaço simples e acessível para envio de *
 
 ---
 
-## 🚀 Como acessar
-O site já está disponível online:  
-👉 [Clique aqui para acessar](https://flyaway999.github.io/inpution2/home-page/index.html)
-
----
-
 ## 📷 Capturas de Tela
 
 <img src="https://github.com/user-attachments/assets/cf9520f4-4430-4cd1-9f30-ddf41bddaed6" width="800" />
@@ -45,5 +39,5 @@ O site já está disponível online:
 
 ---
 
-## 👨‍💻 Autor
-Desenvolvido por **[flyaway999](https://github.com/flyaway999)** ✨白影
+## 👨‍💻 Autores
+Desenvolvido por **[flyaway999](https://github.com/flyaway999)** - **[issayz](https://github.com/Issayz)** - **[Gustavo](https://github.com/Gustavoneves07)** - **[Pedro](https://github.com/carambapedro)** - **[hawan](https://github.com/Fallenzz2)**
