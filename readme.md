@@ -13,7 +13,7 @@ O objetivo principal é oferecer um espaço simples e acessível para envio de *
 ## ✨ Funcionalidades
 - 📬 **Envio de feedbacks** de forma anônima
 - 🔒 **Proteção de identidade** para mensagens sensíveis  
-- 🗂️ **Filtros por categoria** (sugestões, críticas, dúvidas e elogios)  
+- 🗂️ **Filtros por categoria** (sugestões, críticas, elogios ou dúvidas)  
 - 📊 Interface clara e responsiva, acessível em dispositivos móveis  
 
 ---
