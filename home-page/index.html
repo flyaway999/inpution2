@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inpution - Plataforma de Feedback Escolar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #f200f2;
+      --primary-dark: #d44d4d;
+      --secondary: #1219dc;
+      --accent: #de23cb;
+      --background: #000000;
+      --surface: #000000;
+      --surface-light: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --border: #27272a;
+      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #a530e0 100%);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* animação do fundo */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: var(--background);
+    }
+
+    /* cor do fundo */
+    .animated-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 102, 242, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(75, 29, 132, 0.175) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(46, 11, 68, 0.05) 0%, transparent 50%);
+      animation: backgroundShift 20s ease-in-out infinite;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      10% { transform: translateX(20px) translateY(10px); }
+      25% { transform: translateX(20px) translateY(10px); }
+      100% { transform: translateX(-10px) translateY(20px); }
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.263);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(10, 10, 10, 0.534);
+      padding: 0.5rem 0;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-links a:hover::before {
+      width: 80%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+   .hero-title {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      color: white;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface);
+      border-color: var(--primary);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Carousel */
+    .testimonials {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .carousel {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .carousel-item p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      padding: 2rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .carousel-item p::before {
+      content: '"';
+      font-size: 4rem;
+      color: var(--primary);
+      position: absolute;
+      top: -1rem;
+      left: 1rem;
+      font-family: serif;
+    }
+
+    /* Action Buttons */
+    .action-section {
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .action-section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .action-section .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      align-items: stretch;
+    }
+
+    .action-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 220px;
+      justify-content: center;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+      background: var(--surface-light);
+    }
+
+    .action-btn .icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      line-height: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .action-btn:hover .icon {
+      transform: scale(1.1);
+    }
+
+    .action-btn h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    .action-btn p {
+      color: var(--text-secondary);
+      margin: 0;
+      transition: color 0.3s ease;
+      font-size: 1rem;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+
+    .action-btn:hover p {
+      color: var(--text-primary);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 6rem 2rem;
+    }
+
+    .features-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .features-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .features-header p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      line-height: 1;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    /* How it Works Section */
+    .how-it-works {
+      padding: 6rem 2rem;
+      background: var(--surface);
+    }
+
+    .how-it-works-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .how-it-works h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+
+    .how-it-works-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .how-it-works-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3rem;
+      min-height: 300px;
+    }
+
+    .how-it-works-image .icon {
+      font-size: 8rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .how-it-works-text {
+      text-align: left;
+      padding: 2rem;
+    }
+
+    .how-it-works-text p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .how-it-works-steps {
+      list-style: none;
+      padding: 0;
+      counter-reset: step-counter;
+    }
+
+    .how-it-works-steps li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      background: var(--background);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .how-it-works-steps li:hover {
+      border-color: var(--primary);
+      transform: translateX(10px);
+    }
+
+    .how-it-works-steps li::before {
+      content: counter(step-counter);
+      counter-increment: step-counter;
+      background: var(--gradient-primary);
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin-right: 1.5rem;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    /* Team Section */
+    .team-section {
+      padding: 4rem 2rem;
+      background: var(--surface);
+    }
+
+    .team-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .team-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+    }
+
+    .team-member {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      background: var(--background);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-member::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-accent);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .team-member:hover {
+      transform: translateY(-3px);
+      color: white;
+      border-color: transparent;
+    }
+
+    .team-member:hover::before {
+      left: 0;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Scroll Animations */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease;
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        padding: 1rem;
+        min-height: 90vh;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .action-buttons {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 400px;
+      }
+
+      .action-btn {
+        min-height: 200px;
+        padding: 2rem 1.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .how-it-works-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .how-it-works-text {
+        text-align: center;
+        padding: 1rem;
+      }
+
+      .how-it-works-image {
+        min-height: 200px;
+        padding: 2rem;
+      }
+
+      .how-it-works-image .icon {
+        font-size: 6rem;
+      }
+
+      .how-it-works-steps li {
+        padding: 1rem;
+      }
+
+      .how-it-works-steps li:hover {
+        transform: translateY(-3px);
+      }
+    }
+
+    /* Loading Animation */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <link rel="icon" href="imgs/favicon.png" type="image/png" />
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Animated Background -->
+  <div class="animated-bg"></div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-container">
+      <div class="logo">Inpution</div>
+      <nav class="nav-links">
+        <a href="https://olukyr.github.io/projeto/projeto%20ptcc/login-page/index.html">Escola</a>
+        <a href="#tipos">Tipos de Feedback</a>
+        <a href="https://github.com/the-fellas-do-cardoso">Equipe</a>
+        <a href="privacidade.html">Privacidade</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">INPUTION</h1>
+      <p class="hero-subtitle">
+        Conecte alunos, professores e escola através de uma comunicação segura, anônima e eficiente. 
+        Transforme opiniões em melhorias reais.
+      </p>
+      <div class="cta-buttons">
+        <a href="#tipos" class="btn-primary">
+          <span>Começar Agora</span>
+          <span>→</span>
+        </a>
+        <a href="#como-funciona" class="btn-secondary">Como Funciona</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Carousel -->
+  <section class="testimonials scroll-reveal">
+    <h2>O que nossa comunidade diz</h2>
+    <div id="mensagemCarrossel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner" id="carousel-inner">
+        <div class="carousel-item active"><p>Esse site realmente me ouviu. Obrigado!</p></div>
+        <div class="carousel-item"><p>Mandei uma sugestão e foi analisada em 2 dias.</p></div>
+        <div class="carousel-item"><p>Muito fácil de usar.</p></div>
+        <div class="carousel-item"><p>Design bonito e intuitivo.</p></div>
+        <div class="carousel-item"><p>A plataforma é super responsiva e rápida.</p></div>
+        <div class="carousel-item"><p>Me senti ouvido e valorizado.</p></div>
+        <div class="carousel-item"><p>A equipe respondeu minhas dúvidas com rapidez.</p></div>
+        <div class="carousel-item"><p>Ótima experiência de usuário.</p></div>
+        <div class="carousel-item"><p>Facilita muito a comunicação entre alunos e escola.</p></div>
+        <div class="carousel-item"><p>Amei a interface moderna e clean.</p></div>
+        <div class="carousel-item"><p>Sistema eficiente e confiável.</p></div>
+        <div class="carousel-item"><p>Recomendo para todos os estudantes.</p></div>
+        <div class="carousel-item"><p>As atualizações são constantes e úteis.</p></div>
+        <div class="carousel-item"><p>Suporte sempre prestativo e gentil.</p></div>
+        <div class="carousel-item"><p>Me ajudou a expressar minhas ideias com clareza.</p></div>
+        <div class="carousel-item"><p>Muito bom para receber feedbacks anônimos.</p></div>
+        <div class="carousel-item"><p>A escola realmente se importa com nossa opinião.</p></div>
+        <div class="carousel-item"><p>Sistema intuitivo e fácil de navegar.</p></div>
+        <div class="carousel-item"><p>Adorei o design responsivo para celular.</p></div>
+        <div class="carousel-item"><p>Sempre volto para deixar meu feedback.</p></div>
+        <div class="carousel-item"><p>O processo é rápido e simples.</p></div>
+        <div class="carousel-item"><p>Segurança e privacidade garantidas.</p></div>
+        <div class="carousel-item"><p>Feedbacks realmente fazem diferença.</p></div>
+        <div class="carousel-item"><p>A escola mudou muito com base nas sugestões.</p></div>
+        <div class="carousel-item"><p>Ferramenta indispensável para alunos e professores.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Action Buttons -->
+  <section class="action-section scroll-reveal" id="tipos">
+    <h2>Tipos de Feedback</h2>
+    <p class="subtitle">Escolha a categoria que melhor representa sua mensagem e contribua para um ambiente escolar melhor</p>
+    
+    <div class="action-buttons">
+      <a href="duvidas.html" class="action-btn">
+        <span class="icon">❓</span>
+        <h3>Dúvidas</h3>
+        <p>Esclareça suas questões acadêmicas ou administrativas de forma rápida e organizada</p>
+      </a>
+      <a href="sugestao.html" class="action-btn">
+        <span class="icon">💡</span>
+        <h3>Sugestões</h3>
+        <p>Compartilhe ideias inovadoras para melhorar o ambiente escolar e a experiência de todos</p>
+      </a>
+      <a href="elogios.html" class="action-btn">
+        <span class="icon">👏</span>
+        <h3>Elogios</h3>
+        <p>Valorize atitudes positivas, reconheça boas práticas e incentive comportamentos exemplares</p>
+      </a>
+      <a href="criticas.html" class="action-btn">
+        <span class="icon">🎯</span>
+        <h3>Críticas</h3>
+        <p>Aponte problemas de forma construtiva e ajude a identificar áreas que precisam de melhoria</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features scroll-reveal">
+    <div class="features-container">
+      <div class="features-header">
+        <h2>Por que escolher o Inpution?</h2>
+        <p>Uma plataforma pensada para facilitar a comunicação e promover melhorias reais no ambiente escolar</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🔒</span>
+          <h3>100% Anônimo</h3>
+          <p>Sua privacidade é nossa prioridade. Nenhum dado pessoal é coletado, armazenado ou compartilhado. Expresse-se com total liberdade e segurança.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">⚡</span>
+          <h3>Resposta Rápida</h3>
+          <p>Feedbacks são analisados e respondidos rapidamente pela equipe escolar. Sua voz é ouvida e suas sugestões são levadas a sério.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎨</span>
+          <h3>Interface Moderna</h3>
+          <p>Design intuitivo, responsivo e acessível. Uma experiência perfeita em qualquer dispositivo, pensada para facilitar sua interação.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🤝</span>
+          <h3>Comunicação Clara</h3>
+          <p>Facilita o diálogo construtivo entre alunos, professores e administração. Promove um ambiente de colaboração e respeito mútuo.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📊</span>
+          <h3>Impacto Real</h3>
+          <p>Suas sugestões geram mudanças concretas e mensuráveis no ambiente escolar. Acompanhe como suas ideias fazem a diferença.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🛡️</span>
+          <h3>Seguro e Confiável</h3>
+          <p>Plataforma desenvolvida com tecnologia de ponta e as melhores práticas de segurança para proteger suas informações.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it Works -->
+  <section class="how-it-works scroll-reveal" id="como-funciona">
+    <div class="how-it-works-container">
+      <h2>Como funciona?</h2>
+      
+      <div class="how-it-works-content">
+        <div class="how-it-works-image">
+          <span class="icon">🚀</span>
+        </div>
+        
+        <div class="how-it-works-text">
+          <p>
+            Nossa plataforma permite que qualquer membro da comunidade escolar envie mensagens anônimas de forma segura e eficiente. 
+            O processo é simples, rápido e garante total privacidade.
+          </p>
+          
+          <ol class="how-it-works-steps">
+            <li>Escolha o tipo de feedback que deseja enviar</li>
+            <li>Escreva sua mensagem de forma clara e respeitosa</li>
+            <li>Envie mensagens com total segurança</li>
+            <li>Acompanhe as melhorias implementadas</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section scroll-reveal">
+    <div class="team-container">
+      <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+        Conheça nossa equipe
+      </h3>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+        Desenvolvedores apaixonados por criar soluções que fazem a diferença
+      </p>
+      <div class="team-grid">
+        <a href="https://instagram.com/999flyaway" target="_blank" class="team-member" rel="noopener noreferrer">Thiago</a>
+        <a href="https://instagram.com/issayzly07" target="_blank" class="team-member" rel="noopener noreferrer">Raissa</a>
+        <a href="https://instagram.com/" target="_blank" class="team-member" rel="noopener noreferrer">Hawan</a>
+        <a href="https://instagram.com/gustaviiin.07" target="_blank" class="team-member" rel="noopener noreferrer">Gustavo</a>
+        <a href="https://instagram.com/pedro.qxz" target="_blank" class="team-member" rel="noopener noreferrer">Pedro</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div style="color: var(--text-secondary);">© Alfredo Cardoso - Todos os direitos reservados</div>
+      <div class="footer-links">
+        <a href="#tipos">Compartilhar</a>
+        <a href="#como-funciona">Dúvidas</a>
+        <a href="https://github.com/the-fellas-do-cardoso">Contato</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="scripts.js"></script>
+  <script>
+    // Loading Animation
+    window.addEventListener('load', () => {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      setTimeout(() => {
+        loadingOverlay.classList.add('hidden');
+      }, 1000);
+    });
+
+    // Header Scroll Effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll Reveal Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Parallax Effect for Background
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelector('.animated-bg');
+      const speed = scrolled * 0.5;
+      parallax.style.transform = `translateY(${speed}px)`;
+    });
+
+    // Add floating animation to action buttons
+    document.querySelectorAll('.action-btn').forEach((btn, index) => {
+      btn.style.animationDelay = `${index * 0.1}s`;
+      btn.classList.add('floating');
+    });
+  </script>
+</body>
+</html>
