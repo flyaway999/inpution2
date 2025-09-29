@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Política de Privacidade - Inpution</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #f200f2;
+      --primary-dark: #d44d4d;
+      --secondary: #1219dc;
+      --accent: #10b981;
+      --background: #0a0a0a;
+      --surface: #1a1a1a;
+      --surface-light: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --border: #27272a;
+      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #06b6d4 100%);
+      --radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .lock-icon {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+      animation: lockAnimation 2s ease-in-out infinite;
+    }
+
+    @keyframes lockAnimation {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.1) rotate(-5deg); }
+      75% { transform: scale(1.1) rotate(5deg); }
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      background: var(--surface);
+      padding: 2rem;
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius);
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .privacy-image {
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      background: var(--gradient-primary);
+      border-radius: var(--radius);
+      margin: 3rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      animation: fadeInUp 1s ease-out 0.4s both;
+      transition: transform 0.3s ease;
+    }
+
+    .privacy-image:hover {
+      transform: scale(1.05);
+    }
+
+    .info-text {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-top: 3rem;
+      background: var(--surface);
+      padding: 3rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      text-align: left;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .info-text p {
+      margin-bottom: 1.5rem;
+    }
+
+    .info-text strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gradient-primary);
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      margin-top: 3rem;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+      color: white;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 2rem 1rem;
+      }
+
+      .info-text {
+        padding: 2rem;
+        font-size: 1rem;
+      }
+
+      .privacy-image {
+        height: 200px;
+        font-size: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lock-icon">🔒</div>
+    <h1>Privacidade & Segurança</h1>
+    
+    <div class="tagline">
+      Seu feedback está 100% seguro! Esta plataforma protege sua identidade e respeita sua privacidade.
+    </div>
+
+    <div class="privacy-image">
+      🛡️
+    </div>
+
+    <div class="info-text">
+      <p>
+        No <strong>Inpution</strong>, a privacidade dos nossos usuários é nossa prioridade máxima. Todas as mensagens enviadas são <strong>100% anônimas</strong> e não registramos nenhum dado pessoal. Isso significa que você pode compartilhar suas ideias, sugestões, críticas ou denúncias com total confiança.
+      </p>
+      <p>
+        Nossa plataforma foi construída com base em princípios de <strong>segurança, ética e transparência</strong>. As informações recebidas são tratadas com responsabilidade e jamais são repassadas para terceiros.
+      </p>
+      <p>
+        Utilizamos <strong>tecnologia de ponta</strong> para impedir rastreamentos e proteger suas contribuições. Ao utilizar o site, você está ajudando a melhorar o ambiente escolar de forma colaborativa, sem abrir mão da sua privacidade.
+      </p>
+      <p>
+        Caso tenha dúvidas, estamos sempre à disposição para esclarecimentos através de nossos canais de contato. <strong>Obrigado por confiar no Inpution!</strong>
+      </p>
+    </div>
+
+    <a href="index.html" class="back-button">
+      ← Voltar ao Início
+    </a>
+  </div>
+</body>
+</html>
