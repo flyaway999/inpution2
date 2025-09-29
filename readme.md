@@ -46,4 +46,4 @@ O site já está disponível online:
 ---
 
 ## 👨‍💻 Autor
-Desenvolvido por **[flyaway999](https://github.com/flyaway999)** ✨
+Desenvolvido por **[flyaway999](https://github.com/flyaway999)** ✨白影
