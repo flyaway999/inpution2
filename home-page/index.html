@@ -331,7 +331,6 @@
 
     .action-btn {
       background: var(--surface);
-      border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 2.5rem 2rem;
       text-decoration: none;
@@ -794,6 +793,239 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+
+    /* ==== Scroll Reveal Base ==== */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ==== Variações para deixar mais dinâmico ==== */
+
+/* Fade-in da esquerda */
+.scroll-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.scroll-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade-in da direita */
+.scroll-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.scroll-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Pop-up com zoom */
+.scroll-zoom {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.7s ease-out;
+}
+.scroll-zoom.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger effect (um elemento depois do outro) */
+.stagger-container > * {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease-out;
+}
+.stagger-container.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger-container.revealed > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-container.revealed > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-container.revealed > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-container.revealed > *:nth-child(4) { transition-delay: 0.4s; }
+
+/* === Text Animations === */
+.hero-title {
+  animation: fadeInGradient 2.5s ease forwards;
+}
+
+@keyframes fadeInGradient {
+  0% {
+    opacity: 0;
+    background-size: 200% 200%;
+    background-position: 100% 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    background-position: 0 50%;
+    transform: translateY(0) scale(1.05);
+  }
+  100% {
+    background-position: 50% 50%;
+    transform: scale(1);
+  }
+}
+
+.hero-subtitle {
+  animation: fadeSlide 1.8s ease 0.4s forwards;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px) skewY(3deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) skewY(0);
+  }
+}
+
+/* === Buttons Shine Effect === */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-25deg);
+}
+
+.btn-primary:hover::after {
+  left: 130%;
+  transition: left 0.75s ease;
+}
+
+/* Pulse Glow Effect */
+.btn-primary:hover {
+  box-shadow: 0 0 20px rgba(255, 242, 0, 0.6),
+              0 0 40px rgba(166, 115, 21, 0.3);
+  transform: translateY(-3px) scale(1.02);
+}
+
+/* Secondary Button Glow */
+.btn-secondary:hover {
+  box-shadow: inset 0 0 10px rgba(255, 242, 0, 0.3),
+              0 0 15px rgba(255, 242, 0, 0.2);
+  transform: translateY(-3px) scale(1.01);
+}
+
+/* === Card Hover Animations === */
+.feature-card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px) rotate3d(1, 1, 0, 3deg);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.35);
+}
+
+.feature-icon {
+  display: inline-block;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(3deg); }
+}
+
+/* === Action Buttons Entrance === */
+.action-btn {
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+  animation: zoomFade 0.8s ease forwards;
+}
+
+.action-btn:nth-child(1) { animation-delay: 0.3s; }
+.action-btn:nth-child(2) { animation-delay: 0.5s; }
+.action-btn:nth-child(3) { animation-delay: 0.7s; }
+.action-btn:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes zoomFade {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+
+/* Base para todos */
+.action-btn {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  transition: color 0.3s ease;
+}
+
+.action-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: left 0.4s ease;
+}
+
+/* Ativa o preenchimento */
+.action-btn:hover::before {
+  left: 0;
+}
+
+/* Cores específicas */
+.action-btn.duvida::before {
+  background: linear-gradient(135deg, #f52727, #7b0b0b); /* vermelho */
+}
+
+.action-btn.sugestao::before {
+  background: linear-gradient(135deg, #ff9800, #9f5903); /* laranja */
+}
+
+.action-btn.elogio::before {
+  background: linear-gradient(135deg, #42eaac, #036e4c); /* verde */
+}
+
+.action-btn.critica::before {
+  background: linear-gradient(135deg, #3b82f6, #0e2c90); /* azul */
+}
+
+/* Faz o texto ficar branco no hover */
+.action-btn:hover h3,
+.action-btn:hover p,
+.action-btn:hover .icon {
+  color: #fff !important;
+}
+
+
   </style>
   <link rel="icon" href="imgs/favicon.png" type="image/png" />
 </head>
@@ -877,27 +1109,28 @@
     <p class="subtitle">Escolha a categoria que melhor representa sua mensagem e contribua para um ambiente escolar melhor</p>
     
     <div class="action-buttons">
-      <a href="duvidas.html" class="action-btn">
-        <span class="icon">❓</span>
-        <h3>Dúvidas</h3>
-        <p>Esclareça suas questões acadêmicas ou administrativas de forma rápida e organizada</p>
-      </a>
-      <a href="sugestao.html" class="action-btn">
-        <span class="icon">💡</span>
-        <h3>Sugestões</h3>
-        <p>Compartilhe ideias inovadoras para melhorar o ambiente escolar e a experiência de todos</p>
-      </a>
-      <a href="elogios.html" class="action-btn">
-        <span class="icon">👏</span>
-        <h3>Elogios</h3>
-        <p>Valorize atitudes positivas, reconheça boas práticas e incentive comportamentos exemplares</p>
-      </a>
-      <a href="criticas.html" class="action-btn">
-        <span class="icon">🎯</span>
-        <h3>Críticas</h3>
-        <p>Aponte problemas de forma construtiva e ajude a identificar áreas que precisam de melhoria</p>
-      </a>
-    </div>
+  <a href="duvidas.html" class="action-btn duvida">
+    <span class="icon">🤔</span>
+    <h3>Dúvidas</h3>
+    <p>Esclareça suas questões acadêmicas ou administrativas de forma rápida e organizada</p>
+  </a>
+  <a href="sugestao.html" class="action-btn sugestao">
+    <span class="icon">💡</span>
+    <h3>Sugestões</h3>
+    <p>Compartilhe ideias inovadoras para melhorar o ambiente escolar e a experiência de todos</p>
+  </a>
+  <a href="elogios.html" class="action-btn elogio">
+    <span class="icon">👏</span>
+    <h3>Elogios</h3>
+    <p>Valorize atitudes positivas, reconheça boas práticas e incentive comportamentos exemplares</p>
+  </a>
+  <a href="criticas.html" class="action-btn critica">
+    <span class="icon">🎯</span>
+    <h3>Críticas</h3>
+    <p>Aponte problemas de forma construtiva e ajude a identificar áreas que precisam de melhoria</p>
+  </a>
+</div>
+
   </section>
 
   <!-- Features Section -->
@@ -982,7 +1215,7 @@
       <div class="team-grid">
         <a href="https://instagram.com/999flyaway" target="_blank" class="team-member" rel="noopener noreferrer">Thiago</a>
         <a href="https://instagram.com/issayzly07" target="_blank" class="team-member" rel="noopener noreferrer">Raissa</a>
-        <a href="https://instagram.com/" target="_blank" class="team-member" rel="noopener noreferrer">Hawan</a>
+        <a href="https://instagram.com/Fallenzz_h" target="_blank" class="team-member" rel="noopener noreferrer">Hawan</a>
         <a href="https://instagram.com/gustaviiin.07" target="_blank" class="team-member" rel="noopener noreferrer">Gustavo</a>
         <a href="https://instagram.com/pedro.qxz" target="_blank" class="team-member" rel="noopener noreferrer">Pedro</a>
       </div>
@@ -994,7 +1227,7 @@
     <div class="footer-container">
       <div style="color: var(--text-secondary);">© Alfredo Cardoso - Todos os direitos reservados</div>
       <div class="footer-links">
-        <a href="#tipos">Compartilhar</a>
+        <a href="#" id="shareBtn">Compartilhar</a>
         <a href="#como-funciona">Dúvidas</a>
         <a href="https://github.com/the-fellas-do-cardoso">Contato</a>
       </div>
@@ -1067,6 +1300,32 @@
       btn.style.animationDelay = `${index * 0.1}s`;
       btn.classList.add('floating');
     });
-  </script>
+  
+    // Share Button Functionality
+  const shareBtn = document.getElementById("shareBtn");
+
+  if (navigator.share) {
+    shareBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      try {
+        await navigator.share({
+          title: "Inpution - Plataforma de Feedback Escolar",
+          text: "Conecte alunos, professores e escola com o Inpution!",
+          url: window.location.href
+        });
+        console.log("Compartilhado com sucesso!");
+      } catch (err) {
+        console.error("Erro ao compartilhar:", err);
+      }
+    });
+  } else {
+    // fallback se navegador não suportar
+    shareBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("Seu navegador não suporta compartilhamento direto. Copie o link: " + window.location.href);
+    });
+  }
+</script>
+
 </body>
 </html>
