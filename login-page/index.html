@@ -4,142 +4,141 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inpution - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/favicon.png" type="image/png" />
+
   <style>
+    :root {
+      --primary: #fff200;
+      --secondary: #a67315;
+      --background: #000000;
+      --surface: #141414;
+      --surface-light: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --border: #27272a;
+      --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+      --radius: 12px;
+      --shadow-md: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
     * {
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
       margin: 0;
       padding: 0;
-      background: #f0f4f8;
+      background: var(--background);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      color: var(--text-primary);
     }
 
     .login-container {
-      background: white;
+      background: var(--surface);
       padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
       width: 100%;
       max-width: 400px;
+      text-align: center;
+      border: 1px solid var(--border);
+      animation: fadeIn 1s ease-out;
     }
 
     h1 {
-      text-align: center;
       margin-bottom: 1.5rem;
-      color: #000000;
-      transition: transform 0.3s ease, color 0.3s ease;
+      font-weight: 800;
+      font-size: 2rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
     h1:hover {
-      color: #1a73e8;
-      transform: scale(1.08);
+      transform: scale(1.05);
     }
 
     label {
       display: block;
+      text-align: left;
       margin-top: 1rem;
       margin-bottom: 0.3rem;
-      color: #333;
+      color: var(--text-secondary);
       font-weight: 500;
     }
 
     input {
       width: 100%;
-      padding: 0.7rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-light);
+      color: var(--text-primary);
       outline: none;
-      transition: border 0.3s ease;
+      transition: border 0.3s ease, background 0.3s ease;
     }
 
     input:focus {
-      border-color: #1a73e8;
+      border-color: var(--primary);
+      background: #1d1d1d;
     }
 
     button {
-      position: relative;
-      display: inline-block;
-      border: none;
-      outline: none;
-      padding: 0.8rem 2rem;
-      margin: 1.5rem auto 0;
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.9rem;
       font-size: 1rem;
       font-weight: 600;
-      border-radius: 8px;
-      background: #000000;
-      color: white;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--gradient-primary);
+      color: #000;
       cursor: pointer;
-      overflow: hidden;
-      letter-spacing: 0.05rem;
-      width: 100%;
-      max-width: 400px;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    button span {
       position: relative;
-      z-index: 10;
-      transition: color 0.4s;
-    }
-
-    button::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -10%;
-      width: 120%;
-      height: 100%;
-      background: #000;
-      transform: skew(30deg);
-      transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
-      z-index: 1;
+      overflow: hidden;
     }
 
     button::after {
       content: "";
       position: absolute;
       top: 0;
-      left: 0;
-      width: 0%;
+      left: -75%;
+      width: 50%;
       height: 100%;
-      background: #1a73e8;
-      transition: width 0.5s ease;
-      z-index: 0;
-    }
-
-    button:hover::before {
-      transform: translate3d(100%, 0, 0);
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: skewX(-25deg);
     }
 
     button:hover::after {
-      width: 100%;
-    }
-
-    button:hover span {
-      color: white;
+      left: 130%;
+      transition: left 0.75s ease;
     }
 
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 15px rgba(255,242,0,0.4), 0 0 25px rgba(166,115,21,0.25);
     }
 
     .footer-text {
       margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #555;
-      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
-  <link rel="icon" href="img/favicon.png" type="image/png" />
-  <link rel="shortcut icon" href="img/favicon.png" type="image/png" />
 </head>
 
 <body>
@@ -153,7 +152,7 @@
       <label for="password">Senha</label>
       <input type="password" id="password" name="senha" required />
 
-      <button type="submit"><span>Entrar</span></button>
+      <button type="submit">Entrar</button>
     </form>
 
     <p class="footer-text">© 2025 Alfredo Cardoso. Todos os direitos reservados.</p>
@@ -191,7 +190,6 @@
         return;
       }
 
-      // Tudo certo! Redireciona para o painel
       window.location.href = "../home-page/index.html";
     });
   </script>
