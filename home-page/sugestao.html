@@ -4,23 +4,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Página de Sugestão</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <style>
+    :root {
+      --primary: #ff9800;
+      --secondary: #9f5903;
+      --background: #000000;
+      --surface: #141414;
+      --surface-light: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --border: #27272a;
+      --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+      --radius: 12px;
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
+      background: var(--background);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      color: var(--text-primary);
     }
 
-    /* EFEITO FADE-IN */
+    /* efeito de entrada */
     .fade-in {
       animation: fadeIn 0.8s ease forwards;
       opacity: 0;
@@ -35,51 +52,53 @@
     }
 
     .feedback-container {
-      background-color: white;
+      background: var(--surface);
       width: 500px;
-      border-radius: 20px;
+      border-radius: var(--radius);
       padding: 30px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* Efeito ao passar o mouse */
     .feedback-container:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(255,242,0,0.2);
     }
 
     .header {
-      background-color: #ffc107;
-      border-radius: 15px 15px 0 0;
+      background: var(--gradient-primary);
+      border-radius: var(--radius);
       padding: 20px;
       text-align: center;
-      color: white;
-      font-size: 24px;
+      color: #000;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
     }
 
     .form-group {
       margin-bottom: 20px;
+      text-align: left;
     }
 
     .input-field,
     .text-area {
       width: 100%;
       padding: 15px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      transition: border 0.2s ease;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface-light);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: border 0.3s ease, background 0.3s ease;
     }
 
     .input-field:focus,
     .text-area:focus {
-      border: 1px solid #4CAF50;
+      border: 1px solid var(--primary);
+      background: #1d1d1d;
       outline: none;
-    }
-
-    .input-field {
-      margin-bottom: 20px;
     }
 
     .text-area {
@@ -88,18 +107,38 @@
     }
 
     .btn-submit {
-      background-color: #ffc107;
-      color: white;
-      padding: 10px 20px;
+      background: var(--gradient-primary);
+      color: #000;
+      padding: 12px 24px;
       border: none;
-      border-radius: 10px;
+      border-radius: var(--radius);
       cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: skewX(-25deg);
+    }
+
+    .btn-submit:hover::after {
+      left: 130%;
+      transition: left 0.75s ease;
     }
 
     .btn-submit:hover {
-      background-color: #e0ad11;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 15px rgba(25, 25, 13, 0.4), 0 0 25px rgba(166,115,21,0.25);
     }
 
     .submit-container {
@@ -108,15 +147,11 @@
   </style>
 </head>
 <body>
-  <!-- fade-in aplicado aqui -->
   <div class="feedback-container fade-in">
     <div class="header">
-      Diga-nos a sua sugestão
+      Diga-nos a sua sugestão 💡
     </div>
-    <form
-      action="https://formspree.io/f/xnnvydye"
-      method="POST"
-    >
+    <form action="https://formspree.io/f/xnnvydye" method="POST">
       <div class="form-group">
         <input
           type="text"
