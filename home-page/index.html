@@ -1075,25 +1075,27 @@ body, header, .feature-card, .action-btn, .hero, .features-container, footer {
   transition: background 0.28s ease, color 0.28s ease, border-color 0.28s ease;
 }
 
-/* --- Ajuste para mobile (botão não ficar em cima de nada) --- */
-@media (max-width: 600px) {
+/* ============================================
+   FIX REAL DO BOTÃO NO MOBILE
+   ============================================ */
+@media (max-width: 700px) {
   .theme-btn {
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    top: auto;
-    background: rgba(0,0,0,0.4);
+    position: fixed !important;
+    right: 14px !important;
+    bottom: 18px !important;
+    top: auto !important;
+    background: rgba(0,0,0,0.45);
     backdrop-filter: blur(6px);
-    font-size: 20px;
     padding: 10px 12px;
     border-radius: 12px;
-    z-index: 3000; /* sempre acima sem atrapalhar */
+    z-index: 3000 !important; /* sempre acima */
   }
 
   .light-mode .theme-btn {
-    background: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.65);
   }
 }
+
 
   </style>
   <link rel="icon" href="imgs/favicon.png" type="image/png" />
