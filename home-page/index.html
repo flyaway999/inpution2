@@ -1076,19 +1076,20 @@ body, header, .feature-card, .action-btn, .hero, .features-container, footer {
 }
 
 
-@media (max-width: 768px) {
-  .theme-btn {
-    position: fixed !important;
-    bottom: 22px;
-    right: 22px;
-    top: auto !important;
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(8px);
-    padding: 10px;
-    border-radius: 12px;
-    z-index: 9999;
-  }
+/* garante que o container tenha posição */
+.header-container {
+  position: relative;
 }
+
+/* botão fixo no canto superior direito do header */
+.theme-btn {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%); /* centraliza verticalmente */
+  z-index: 5000;
+}
+
 
 
   </style>
