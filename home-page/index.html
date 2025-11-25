@@ -186,11 +186,19 @@
 }
 
     .hero-subtitle {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
-      margin-bottom: 3rem;
-      animation: fadeInUp 1s ease-out 0.2s both;
-    }
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+
+  opacity: 0; /* garante estado inicial correto */
+
+  animation-name: fadeInUp;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-delay: .1.0s;
+  animation-fill-mode: both; /* ESSENCIAL – evita o bug */
+}
+
 
     .cta-buttons {
       display: flex;
