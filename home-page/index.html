@@ -1029,21 +1029,27 @@
 
 /* BOTÃO TEMA ESCURO E CLARO ⬇️⬇*/
 
-.theme-btn{
-  position: absolute;
-  right: 26px; /* ajuste se necessário */
-  top: 18px;
-  background: transparent;
-  border: 0;
+.theme-btn {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
   color: var(--text-primary);
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-  transition: transform .18s ease, opacity .18s;
-  z-index: 2000;
+  padding: 10px;
+  border-radius: 35%;
+  transition: transform .18s ease, opacity .18s, background 0.18s;
+  z-index: 5000;
 }
-.theme-btn:hover { transform: translateY(-2px); opacity: .85; }
+
+.theme-btn:hover {
+  transform: translateY(-3px);
+  opacity: .9;
+}
+
 
 /* === Light mode: sobrescreve as variáveis já definidas no :root === */
 .light-mode {
@@ -1078,29 +1084,22 @@ body, header, .feature-card, .action-btn, .hero, .features-container, footer {
   </style>
   
   <link rel="icon" href="imgs/favicon.png" type="image/png" />
-</head>
-<body>
-  <!-- Loading Overlay -->
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loader"></div>
+<header id="header">
+  <div class="header-container">
+    <div class="logo">Inpution</div>
+
+    <nav class="nav-links">
+      <a href="https://flyaway999.github.io/site-do-cardoso/home-page/index.html">Escola</a>
+      <a href="#tipos">Tipos de Feedback</a>
+      <a href="https://github.com/the-fellas-do-cardoso">Equipe</a>
+      <a href="privacidade.html">Privacidade</a>
+    </nav>
   </div>
+</header>
 
-  <!-- Animated Background -->
-  <div class="animated-bg"></div>
+<!-- Botão flutuante FORA do header -->
+<button id="theme-toggle" class="theme-btn" aria-label="Alternar tema">🌙</button>
 
-  <!-- Header -->
-  <header id="header">
-    <div class="header-container">
-      <div class="logo">Inpution</div>
-      <button id="theme-toggle" class="theme-btn" aria-label="Alternar tema">🌙</button>
-      <nav class="nav-links">
-        <a href="https://flyaway999.github.io/site-do-cardoso/home-page/index.html">Escola</a>
-        <a href="#tipos">Tipos de Feedback</a>
-        <a href="https://github.com/the-fellas-do-cardoso">Equipe</a>
-        <a href="privacidade.html">Privacidade</a>
-      </nav>
-    </div>
-  </header>
 
   <!-- Hero Section -->
   <section class="hero">
